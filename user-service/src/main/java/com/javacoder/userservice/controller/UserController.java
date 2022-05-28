@@ -10,32 +10,32 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.javacoder.userservice.dto.DepartmentDto;
+import com.javacoder.userservice.dto.UserDto;
 import com.javacoder.userservice.dto.UserResponse;
-import com.javacoder.userservice.entity.User;
-import com.javacoder.userservice.service.UserService;
+import com.javacoder.userservice.facade.UserFacade;
 
 @RestController
 @RequestMapping("users")
 public class UserController {
 
 	@Autowired 
-	UserService service;
+	UserFacade facade;
 	
 	@Autowired
 	RestTemplate template;
 	
 	@PostMapping("/")
-	public User saveUser(@RequestBody User user) {
+	public UserDto saveUser(@RequestBody UserDto user) {
 		
-		return service.saveUSer(user);
+		return facade.saveUser(user);
 	}
 	
 	@GetMapping("{userId}")
 	public UserResponse getuserInfo(@PathVariable Long userId) {
-		User user = service.getUserById(userId);
+		UserDto user = facade.getUserById(userId);
 		DepartmentDto departmentDto = template.getForObject("http://localhost:9191/departments/1", DepartmentDto.class);
 		UserResponse res = new UserResponse();
-//		res.setUser(user);
+		res.setUser(user);
 		res.setDept(departmentDto);
 		return res;
 	}
