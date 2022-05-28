@@ -1,4 +1,4 @@
-package com.javacoder.departmentservice;
+package com.javacoder.eurekaserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
