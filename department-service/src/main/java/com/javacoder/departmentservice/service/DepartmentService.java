@@ -18,12 +18,12 @@ public class DepartmentService {
 		return repository.save(dep);
 	}
 
+	public Department getDepartmentById(Long depId) {
+		return repository.findByDepId(depId);
+	}
 	
 	public List<Department> getDepartments() {
 		return repository.findAll();
 	}
 
-	public Department getDepartmentById(Long depId) {
-		return repository.findByDepId(depId);
-	}
 }

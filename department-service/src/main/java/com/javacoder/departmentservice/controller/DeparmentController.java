@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.javacoder.departmentservice.entity.Department;
-import com.javacoder.departmentservice.service.DepartmentService;
+import com.javacoder.departmentservice.dto.DepartmentDto;
+import com.javacoder.departmentservice.facade.DepartmentFacade;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,18 +18,18 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/departments")
 public class DeparmentController {
 
-	@Autowired DepartmentService service;
+	@Autowired DepartmentFacade facade;
 
 	@PostMapping("/")
-	public Department saveDepartment(@ RequestBody Department dep) {
-		System.out.println("DeparmentController.saveDepartment()");
-		return service.saveDepartment(dep);
+	public DepartmentDto saveDepartment(@ RequestBody DepartmentDto dto) {
+		log.info("Save deparment");
+		return facade.saveDepartment(dto);
 	}
 	
 	@GetMapping("{depId}")
-	public Department getDepartment(@PathVariable Long depId) {
-		System.out.println("DeparmentController.getDepartment()");
-		return service.getDepartmentById(depId);
+	public DepartmentDto getDepartment(@PathVariable Long depId) {
+		log.info("get Department by dept id");
+		return facade.getDepartmentById(depId);
 	}
 	
 }
