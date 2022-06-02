@@ -13,11 +13,21 @@ public class DepartmentConvertor {
 
 	public DepartmentDto entityToData(Department dep) {
 		DepartmentDto dto = new DepartmentDto();
+		dto.setDepId(dep.getDepId());
+		dto.setDepcode(dep.getDepcode());
+		dto.setName(dep.getName());
+		dto.setAddress(dep.getAddress());
+		
 		return dto;
 	}
 	
 	public Department dataToEntity(DepartmentDto dto) {
 		Department dep = new Department();
+		dep.setDepId(dto.getDepId());
+		dep.setDepcode(dto.getDepcode());
+		dep.setName(dto.getName());
+		dep.setAddress(dto.getAddress());
+		
 		return dep;
 	}
 	
