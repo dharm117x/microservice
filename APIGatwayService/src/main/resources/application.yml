@@ -1,0 +1,24 @@
+server:
+  port: 9191
+
+spring:
+  application:
+    name: APIGATWAY-SERVICE
+  cloud:
+    gateway:
+      routes:
+      - id: USER-SERVICE
+        uri: lb://USER-SERVICE
+        predicates:
+        - Path=/users/**
+        filters:
+        - name: AuthorizationHeaderFilter
+          args:
+            isSecure: false
+       
+      - id: DEPARTMENT-SERVICE
+        uri: lb://DEPARTMENT-SERVICE
+        predicates:
+        - Path=/departments/**
+        
+        

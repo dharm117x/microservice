@@ -3,5 +3,7 @@ server:
   
 spring:
   application:
-    name: USER-SERVICE  
+    name: USER-SERVICE
+  cloud:    config:      enabled: true    
+  config:    import:    - optional:configserver:http://localhost:9999 
   
