@@ -13,6 +13,7 @@ import com.google.common.net.HttpHeaders;
 import reactor.core.publisher.Mono;
 
 public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<AuthorizationHeaderFilter.Config> {
+	final org.slf4j.Logger LOG = LoggerFactory.getLogger(AuthorizationHeaderFilter.class);
 
 	public static class Config {
 		Boolean isSecure;
@@ -27,7 +28,6 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 		
 	}
 
-	final org.slf4j.Logger logger = LoggerFactory.getLogger(AuthorizationHeaderFilter.class);
 
 	public AuthorizationHeaderFilter() {
 		super(Config.class);
@@ -36,6 +36,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 	@Override
 	public GatewayFilter apply(Config config) {
 		return (exchange, chain) -> {
+			LOG.info("Config:: "+config.isSecure);
 			ServerHttpRequest request = exchange.getRequest();
 			if (config.getIsSecure().booleanValue() &&  !request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
 				return onError(exchange, "No authorization header", HttpStatus.UNAUTHORIZED);
