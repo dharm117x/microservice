@@ -25,9 +25,8 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 		public void setIsSecure(Boolean isSecure) {
 			this.isSecure = isSecure;
 		}
-		
-	}
 
+	}
 
 	public AuthorizationHeaderFilter() {
 		super(Config.class);
@@ -36,12 +35,12 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 	@Override
 	public GatewayFilter apply(Config config) {
 		return (exchange, chain) -> {
-			LOG.info("Config:: "+config.isSecure);
+			LOG.info("Config:: " + config.isSecure);
 			ServerHttpRequest request = exchange.getRequest();
-			if (config.getIsSecure().booleanValue() &&  !request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
+			if (config.getIsSecure().booleanValue() && !request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
 				return onError(exchange, "No authorization header", HttpStatus.UNAUTHORIZED);
 			}
-			
+
 			return chain.filter(exchange);
 		};
 	}
@@ -51,5 +50,5 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 		response.setStatusCode(status);
 		return response.setComplete();
 	}
-	
+
 }

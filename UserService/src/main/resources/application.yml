@@ -7,6 +7,26 @@ spring:
   cloud:    config:      enabled: true    
   config:    import:    - optional:configserver:http://localhost:9999 
 
+eureka:  client:    service-url:
+     # defaultZone: http://pear1:8001/eureka, http://pear2:8002/eureka, http://pear3:8003/eureka
+      defaultZone: http://localhost:8761/eureka
+            
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+      dept-service:
+        requestInterceptors:
+        - com.dksite.FeignRequestInterceptor
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+
+
+                    
 management:  endpoints:    web:      exposure:        include:        - "*"
 
 resilience4j:  circuitbreaker:    instances:      DEPARTMENTSERVICE:

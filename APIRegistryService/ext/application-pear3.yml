@@ -1,0 +1,20 @@
+server:
+  port: 8003
+    
+spring:
+  profiles:    active:    - pear3
+  application:
+    name: REGISTRY-SERVICE-pear3
+    
+eureka:
+  server:
+    waitTimeInMsWhenSyncEmpty: 30
+    renewal-percent-threshold: 0.85  
+  instance:
+    hostname: pear3
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    service-url:
+      defaultZone: http://pear1:8001/eureka,http://pear2:8002/eureka
+           

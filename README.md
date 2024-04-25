@@ -7,6 +7,7 @@ dependency:
 -> eurekaServer: discovery server
 -> configServer : Added properties in git hub
 -> gatewayServer: routing request and load balancing
+
 -> clinetService: service api
 
 --------

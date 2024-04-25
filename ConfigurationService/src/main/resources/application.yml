@@ -9,4 +9,6 @@ spring:
       server:
         git:
           uri: https://github.com/dharm117x/config-server.git
+          username: 
+          password: 
           clone-on-start:  true
